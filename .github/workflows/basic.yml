@@ -16,7 +16,7 @@ jobs:
       run: npm install
     - name: Run application
       run: 
-        node npm start & 
+        node server.js & 
         sleep 5
         curl http://localhost:3000
       
