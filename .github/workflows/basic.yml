@@ -1,13 +1,13 @@
-name: basic GHA pipeline
-
-on:
-  push: 
-    branches: ["master"]
+name: CI Example
+on: [push]
 
 jobs:
-  Example-Actions-Job:
-    name: Exploring GitHub Actions
-    runs-on: self-hosted
+  build:
+    runs-on: Lix-ubuntu
+    
     steps:
-      - name: print a statement
-        run: echo "basic GHA pipeline run successfull"
+      - name: Check out repository
+        uses: actions/checkout@v4
+        
+      - name: Run a build script
+        run: echo "Building on my own infrastructure!"
