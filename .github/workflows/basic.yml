@@ -1,4 +1,4 @@
-name: CI Example
+name: node-app-CI pipeline
 on: [push]
 
 jobs:
@@ -6,8 +6,18 @@ jobs:
     runs-on: Lix-ubuntu
     
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-        
-      - name: Run a build script
-        run: echo "Building on my own infrastructure!"
+    - name: checkout code
+      uses: actions/checkout@v7
+    - name: setup node
+      uses: actions/setup-node@v7
+      with:
+        node-version: 24 
+    - name: install packages
+      run: npm install
+    - name: Run application
+      run: 
+        node server.js &
+        sleep 5
+        curl http://localhost:3000
+        pkill -f "node server.js"
+      
