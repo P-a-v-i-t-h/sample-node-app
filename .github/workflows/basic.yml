@@ -1,0 +1,12 @@
+name: basic GHA pipeline
+
+on:
+  push: 
+    branches: ["master"]
+
+jobs:
+  basic:
+    runs-on: ["Lix-ubuntu "]
+    steps:
+      - name: print a statement
+        run: echo"basic GHA pipeline run successfull"
