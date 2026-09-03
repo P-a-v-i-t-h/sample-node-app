@@ -5,8 +5,9 @@ on:
     branches: ["master"]
 
 jobs:
-  basic:
-    runs-on: ["Lix-ubuntu "]
+  Example-Actions-Job:
+    name: Exploring GitHub Actions
+    runs-on: self-hosted
     steps:
       - name: print a statement
-        run: echo"basic GHA pipeline run successfull"
+        run: echo "basic GHA pipeline run successfull"
