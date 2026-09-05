@@ -1,0 +1,30 @@
+name: node-app-CI pipeline
+on: 
+  push:
+    branches: ["feature"]
+
+jobs:
+  build: 
+    runs-on: ["Lix-ubuntu"]
+    
+    steps:
+    - name: checkout code
+      uses: actions/checkout@v4
+    - name: setup node
+      uses: actions/setup-node@v4
+      with:
+        node-version: 24 
+    - name: install packages
+      run: npm install
+    - name: Run application
+      run: 
+        node server.js &
+
+  curl:
+    runs-on: ["Lix-ubuntu"]
+    steps:
+    - name: curl
+      uses: sozo-design/curl@v1.0.2
+      with:
+        args: https://localhost:3000
+      
