@@ -1,7 +1,6 @@
 name: dev-output
 
 on:
-  workflow_dispatch:
   push:
     branches: ["feature"]
     
@@ -22,10 +21,32 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+        
+      - name: Run lint 
+        run: npm run lint --if-present
 
       - name: Run tests
         run: npm test --if-present
 
-      - name: Check application
-        run: node --check server.js & curl http://localhost:5000
+      - name: Build application 
+        run: npm run build --if-present
+
+      - name: start application
+        run: 
+          pkill -f "node server.js" || true 
+          nohup npm start > app.log 2>&1 & 
+          sleep 5
+
+      - name: Health check 
+        run: | 
+          curl --fail http://localhost:3000 
+          echo "Application is running successfully"
+
+      - name: Application URL 
+        run: | 
+          echo "======================================" 
+          echo "Development application is running" 
+          echo "URL: http://localhost:3000" 
+          echo "======================================"    
+          
          
