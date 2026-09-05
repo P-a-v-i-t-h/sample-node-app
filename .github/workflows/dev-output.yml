@@ -1,0 +1,33 @@
+name: dev-output
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["feature"]
+    
+jobs:
+    build-and-test:
+
+      runs-on: Lix-ubuntu
+
+      steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test --if-present
+
+      - name: Check application
+        run: 
+          node --check server.js &
+          sleep5
+          curlhttp://localhost:3000
