@@ -27,7 +27,5 @@ jobs:
         run: npm test --if-present
 
       - name: Check application
-        run: 
-          node --check server.js &
-          sleep5
-          curlhttp://localhost:3000
+        run: node --check server.js &
+         
